@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: coffee-shop-db
+    environment:
+      POSTGRES_DB: coffee_shop_db
+      POSTGRES_USER: coffee_shop_user
+      POSTGRES_PASSWORD: coffee_shop_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
