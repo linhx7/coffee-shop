@@ -13,7 +13,7 @@ public class Queue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "queue_id")
-    private Long queueId;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "shop_id", referencedColumnName = "shop_id")

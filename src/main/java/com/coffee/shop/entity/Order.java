@@ -3,6 +3,7 @@ package com.coffee.shop.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -15,7 +16,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
-    private Long orderId;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
@@ -32,9 +33,11 @@ public class Order {
     @Column(name = "status")
     private String status;
 
-    @OneToMany
-    @JoinColumn(name = "order_id", referencedColumnName = "order_id")
-    private List<OrderItem> orderItems;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems = new ArrayList<>();
 
+
+    @Column(name = "total_price")
+    private Double totalPrice;
 
 }

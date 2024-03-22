@@ -1,5 +1,6 @@
 package com.coffee.shop.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -11,11 +12,11 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id")
-    private Long customerId;
+    private Long id;
 
     @Column(name = "username")
     private String username;
-
+    @JsonIgnore
     @Column(name = "password")
     private String password;
 
