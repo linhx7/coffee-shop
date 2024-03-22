@@ -1,6 +1,10 @@
 1. Setup database
 - Run Database by command
- docker-compose up
+        docker-compose up
+- Build image
+        docker build -t coffee-shop:latest .
+- Run container
+        docker run -p 8080:8080 coffee-shop:latest
 
 2. Request
 + Create Order Request
@@ -9,7 +13,7 @@ Param:
  - shopId: Shop Id
  - queueId: Queue Id
  - body:
-		Map : Id Item , quantity
+		Map : <Id Item , quantity>
 		
 URL: 		
 curl --location 'http://localhost:8080/api/orders?customerId=1&shopId=1&queueId=1' \

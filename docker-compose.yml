@@ -3,9 +3,9 @@ version: '3'
 services:
   postgres:
     image: postgres:latest
-    container_name: coffee-shop-db
+    container_name: coffee-shop-db2
     environment:
-      POSTGRES_DB: coffee_shop_db
+      POSTGRES_DB: coffee_shop_db2
       POSTGRES_USER: coffee_shop_user
       POSTGRES_PASSWORD: coffee_shop_password
     ports:
