@@ -3,11 +3,8 @@ package com.coffee.shop.service;
 
 
 import com.coffee.shop.constants.Constants;
-import com.coffee.shop.exception.CustomerNotFoundException;
+import com.coffee.shop.exception.*;
 import com.coffee.shop.entity.*;
-import com.coffee.shop.exception.MenuNotFoundException;
-import com.coffee.shop.exception.QueueNotFoundException;
-import com.coffee.shop.exception.ShopNotFoundException;
 import com.coffee.shop.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -44,7 +41,6 @@ public class OrderServiceImpl implements OrderService {
         this.orderItemRepository = orderItemRepository;
     }
 
-    // Other methods...
 
     @Override
     public Page<Order> getAllOrders(Pageable pageable) {
@@ -80,6 +76,13 @@ public class OrderServiceImpl implements OrderService {
                 .orElseThrow(() -> new ShopNotFoundException("Shop not found with ID: " + shopId));
         Queue shopQueue = queueRepository.findById(queueId)
                 .orElseThrow(() -> new QueueNotFoundException("Queue not found with ID: " + queueId));
+        int currentQueueSize = orderRepository.getCurrentQueueSizeByQueueIdAndStatus(shopQueue.getId(), Constants.ORDER_STATUS.PENDING);
+        // Get the maximum size of the queue
+        int maxQueueSize = shopQueue.getMaxSize();
+        // Check if the queue is at its maximum capacity
+        if (currentQueueSize >= maxQueueSize) {
+            throw new QueueFullException("Queue is at maximum capacity. Cannot accept more orders.");
+        }
         Order order = new Order();
         order.setCustomer(customer);
         order.setShop(shop);

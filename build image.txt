@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    container_name: coffee-shop-db2
+    environment:
+      POSTGRES_DB: coffee_shop_db2
+      POSTGRES_USER: coffee_shop_user
+      POSTGRES_PASSWORD: coffee_shop_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  app:
+    image: linhx7/coffee-shop:1.0
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/coffee_shop_db2
+      SPRING_DATASOURCE_USERNAME: coffee_shop_user
+      SPRING_DATASOURCE_PASSWORD: coffee_shop_password
+volumes:
+  postgres_data:

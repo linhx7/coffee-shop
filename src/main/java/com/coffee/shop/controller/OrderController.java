@@ -55,7 +55,7 @@ public class OrderController {
             ApiResponse<Order> response = new ApiResponse<>(Constants.RESPONSE_STATUS.SUCCESS_CODE, Constants.RESPONSE_STATUS.SUCCESS, savedOrder);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            ApiResponse<Order> response = new ApiResponse<>(Constants.RESPONSE_STATUS.ERROR_CODE, Constants.RESPONSE_STATUS.ERROR, null);
+            ApiResponse<Order> response = new ApiResponse<>(Constants.RESPONSE_STATUS.ERROR_CODE, e.getMessage(), null);
             return ResponseEntity.ok(response);
         }
     }
