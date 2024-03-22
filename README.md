@@ -1,3 +1,8 @@
+1. Setup database
+- Run Database by command
+ docker-compose up
+
+2. Request
 + Create Order Request
 Param:
  - customerId: Customer Id
