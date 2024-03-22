@@ -32,3 +32,21 @@ Param:
 URL :  
 curl --location --request POST 'http://localhost:8080/api/order-processing/process-orders?shopId=1&queueId=1&numberOfOrders=10' \
 --header 'Content-Type: application/json'
+
+
+
+
+### Requirements
+- Maven 3+
+- Java 17
+- Postgresql Database
+
+### Dependency
+- Spring Boot 3.0.3
+- Liquibase Maven Plugin 4.19.0
+
+### Use cases
+#### Start the service
+```
+mvn spring-boot:run
+```
